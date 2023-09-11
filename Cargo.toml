@@ -1,7 +1,16 @@
 [package]
 name = "shared-pin-rs"
+authors = ["Linus Leo Stöckli"]
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/hacknus/shared-pin-rs"
+description = "An abstraction to share rust embedded_hal pins between functions."
+readme = "README.md"
+keywords = ["shared", "gpio", "pin", "periphereal", "embedded-hal"]
+categories = ["embedded", "hardware-support", "no-std"]
+documentation = "https://docs.rs/shared-pin"
+homepage = "https://github.com/hacknus/shared-pin-rs"
+license = "Apache-2.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
