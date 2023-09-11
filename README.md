@@ -9,11 +9,21 @@ It uses an `Rc<RefCell<Pin>>` to share the `embedded_hal::digital::v2` pin.
 Should be able to be passed on to any function that expects an OutputPin or an InputPin
 
   
-Example:
+## Example:
 
+Put this into your `cargo.toml`:
+```
+shared-bus = "0.1.0"
+```
+
+Imports:
 ```rust
-use shared_pin::SharedPin;
 use embedded_hal::digital::v2::OutputPin;
+use shared_pin::SharedPin;
+```
+
+Definitions:
+```rust
 
 pub fn do_something_with_the_cloned_pin<PIN>(pin: PIN)
     where PIN: OuputPin
@@ -22,12 +32,31 @@ pub fn do_something_with_the_cloned_pin<PIN>(pin: PIN)
     // ...
 }
 
+pub struct Device<PIN> {
+    pin: PIN,
+}
+
+impl<PIN> Device<PIN>
+    where
+        PIN: OutputPin {
+    pub fn new(pin: PIN) -> Self {
+        Self {
+            pin: PIN,
+        }
+    }
+}
+
+```
+
+Usage:
+```rust
 {
     let mut shared_output_pin_1 = SharedPin::new(output_pin);
     let mut shared_output_pin_2 = shared_output_pin_1.clone();
     let mut shared_output_pin_3 = shared_output_pin_1.clone();
     do_something_with_the_cloned_pin(shared_output_pin_2);
-    shared_output_pin_3.set_low();
+    let mut device = Device::new(shared_output_pin_3);
+    device.pin.set_low();
     
     let mut shared_input_pin_1 = SharedPin::new(input_pin);
     let mut shared_input_pin_2 = shared_input_pin_1.clone();
