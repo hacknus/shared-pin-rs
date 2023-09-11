@@ -6,6 +6,7 @@
 
 This is a simple abstraction for embedded rust applications to share a pin between different functions.
 It uses an `Rc<RefCell<Pin>>` to share the `embedded_hal::digital::v2` pin.  
+Should be able to be passed on to any function that expects an OutputPin or an InputPin
 
   
 Example:
