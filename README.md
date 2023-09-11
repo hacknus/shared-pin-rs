@@ -11,10 +11,21 @@ It uses an `Rc<RefCell<Pin>>` to share the `embedded_hal::digital::v2` pin.
 Example:
 ```rust
 use shared_pin::SharedPin;
+
 {
-    let mut shared_pin_1 = SharedPin::new(pin);
-    let mut shared_pin_2 = shared_pin_1.clone();
-    let mut shared_pin_3 = shared_pin_1.clone();
+    let mut shared_output_pin_1 = SharedPin::new(output_pin);
+    let mut shared_output_pin_2 = shared_output_pin_1.clone();
+    let mut shared_output_pin_3 = shared_output_pin_1.clone();
+
+    shared_output_pin_3.set_low();
+
+    let mut shared_input_pin_1 = SharedPin::new(input_pin);
+    let mut shared_input_pin_2 = shared_input_pin_1.clone();
+    let mut shared_input_pin_3 = shared_input_pin_1.clone();
+
+    if shared_input_pin_3.is_low() {
+        // ...
+    }
 }
 ```
 
