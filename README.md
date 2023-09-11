@@ -10,20 +10,29 @@ Should be able to be passed on to any function that expects an OutputPin or an I
 
   
 Example:
+
 ```rust
 use shared_pin::SharedPin;
+use embedded_hal::digital::v2::OutputPin;
+
+pub fn do_something_with_the_cloned_pin<PIN>(pin: PIN)
+    where PIN: OuputPin
+{
+    pin.set_high();
+    // ...
+}
 
 {
     let mut shared_output_pin_1 = SharedPin::new(output_pin);
     let mut shared_output_pin_2 = shared_output_pin_1.clone();
     let mut shared_output_pin_3 = shared_output_pin_1.clone();
-
+    do_something_with_the_cloned_pin(shared_output_pin_2);
     shared_output_pin_3.set_low();
-
+    
     let mut shared_input_pin_1 = SharedPin::new(input_pin);
     let mut shared_input_pin_2 = shared_input_pin_1.clone();
     let mut shared_input_pin_3 = shared_input_pin_1.clone();
-
+    
     if shared_input_pin_3.is_low() {
         // ...
     }
