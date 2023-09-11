@@ -1,5 +1,5 @@
 [package]
-name = "shared-pin-rs"
+name = "shared-pin"
 authors = ["Linus Leo Stöckli"]
 version = "0.1.0"
 edition = "2021"
