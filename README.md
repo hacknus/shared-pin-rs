@@ -12,7 +12,8 @@ Should be able to be passed on to any function that expects an OutputPin or an I
 ## Example:
 
 Put this into your `cargo.toml`:
-```
+```toml
+[dependencies]
 shared-bus = "0.1.0"
 ```
 
